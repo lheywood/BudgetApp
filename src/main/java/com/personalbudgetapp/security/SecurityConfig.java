@@ -22,10 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 			.authorizeRequests()
 				.antMatchers("/js/*", "/css/*").permitAll()
+				.antMatchers("/register").permitAll()
 				.antMatchers("/**").hasRole("USER").and()
 			.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/budgets").and()
+				.defaultSuccessUrl("/budgets")
+				.permitAll().and()
 			.logout()
 				.logoutSuccessUrl("/")
 				.permitAll();
