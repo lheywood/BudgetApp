@@ -1,13 +1,11 @@
 package com.personalbudgetapp.web;
 
-import java.util.HashSet;
-import java.util.Set;
+
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +32,7 @@ public class BudgetController {
 	}
 	
 	@GetMapping("{budgetId}")
-	public String getBudget(@PathVariable Long budgetId, ModelMap model) {
+	public String getBudgets(@PathVariable Long budgetId, ModelMap model) {
 		
 		Budget budget = budgetService.findOne(budgetId);
 		
