@@ -14,8 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="users")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
 	
 	private Long id;
@@ -46,7 +50,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="users")
 	public Set<Budget> getBudgets() {
 		return budgets;
 	}

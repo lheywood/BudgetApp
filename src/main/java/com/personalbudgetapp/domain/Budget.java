@@ -13,9 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-public class Budget {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Budget implements Comparable<Budget> {
 	
 	private Long id;
 	private String name;
@@ -37,19 +43,29 @@ public class Budget {
 	}
 	@ManyToMany
 	@JoinTable(inverseJoinColumns=@JoinColumn(name="user_id"), joinColumns=@JoinColumn(name="budget_id"))
-	public Set<User> getUser() {
+	@JsonIgnore
+	public Set<User> getUsers() {
 		return users;
 	}
-	public void setUser(Set<User> users) {
+	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="budget")
+	@OrderBy
 	public Set<Group> getGroups() {
 		return groups;
 	}
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
+	@Override
+	public int compareTo(Budget budget) {
+		// TODO Auto-generated method stub
+		return this.id.compareTo(budget.getId());
+	}
+	
+	
 	
 	
 

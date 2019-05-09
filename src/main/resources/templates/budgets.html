@@ -1,12 +1,46 @@
 <!DOCTYPE>
-<html>
-<head>
-<title>Your Budgets</title>
-</head>
-<body>
-
-<h1>Budgets</h1>
-
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Your Budgets</title>
+		<script th:include="fragments/header :: headerScripts" th:remove="tag"></script><link rel="stylesheet" href="/css/fontawesome.min.css"/>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
+		<script type="text/javascript">
+			$(function() {
+			$("#addBudget").click(function () {
+				$.ajax({
+					url: '/budgets',
+					method: 'post',
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+						location.reload();
+					},
+					error : function() {
+						console.log("Error creating a new budget");
+					}
+				});
+			});
+});
+		</script>
+	</head>
+	<body>
+	
+		<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<h2 class="col-10">
+    					Budgets
+    				</h2>
+    				<i id="addBudget" class="fas fa-plus col-2 fa-2x"></i>
+    			</div>
+    		</div>
+			<div class="list-group list-group-flush" th:each="budget : ${budgets} ">
+				<a th:href="@{/budgets/{budgetId}(budgetId=${budget.id})}" class="list-group-item list-group-item-action" th:text="${budget.name}">Example Budget</a>
+			</div>
+		</div>
+		
+		
+	
+	
+	</body>
 </html>

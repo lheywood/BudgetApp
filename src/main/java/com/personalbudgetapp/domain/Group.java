@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity 
 @Table(name="groupss")
-public class Group {
+public class Group implements Comparable<Group>{
 	
 	private Long id;
 	private String name;
@@ -50,6 +50,19 @@ public class Group {
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
+	@Override
+	public int compareTo(Group o) {
+		
+		int compareTo = 0;
+		if (this.getId() != null && o.getId() != null) {
+			 compareTo = this.getId().compareTo(o.getId());
+			return compareTo;
+		}
+		return compareTo;
+		
+	}
+	
+
 	
 
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Your Group</title>
+		<script th:include="fragments/header :: headerScripts" th:remove="tag"></script><link rel="stylesheet" href="/css/fontawesome.min.css"/>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
+		
+	</head>
+	<body>
+		<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb h3">
+					    <li class="breadcrumb-item"><a href="/">Budgets</a></li>
+					    <li class="breadcrumb-item " aria-current="page"><a th:href="@{/budgets/{budgetId}(budgetId=${group.budget.id})}" th:text="${group.budget.name}"></a></li>
+					    <li class="breadcrumb-item active" aria-current="page" th:text="${#strings.isEmpty(group.name) ? 'New Group' : group.name}"></li>
+					  </ol>
+					</nav>
+    			</div>
+    		</div>
+    		<div class="card-body">
+    			
+    		</div>
+		</div>
+	</body>
+</html>
