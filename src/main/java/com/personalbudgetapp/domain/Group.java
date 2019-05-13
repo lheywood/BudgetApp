@@ -43,7 +43,7 @@ public class Group implements Comparable<Group>{
 	public void setBudget(Budget budget) {
 		this.budget = budget;
 	}
-	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy="group")
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER, mappedBy="group")
 	public Set<Category> getCategories() {
 		return categories;
 	}
